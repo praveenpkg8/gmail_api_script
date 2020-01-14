@@ -1,3 +1,7 @@
+import datetime
+
+from models.mail import Mail
+
 from apiclient import errors
 
 
@@ -33,15 +37,45 @@ class MailService:
         except errors.HttpError as error:
             print("An error occurred: %s" % error)
 
-
     @classmethod
-    def get_message(cls, service, user_id, msg_id):
+    def get_mail(cls, service, user_id, mail_id):
         try:
-            message = service.users().messages().get(userId=user_id, id=msg_id).execute()
-
-            print("Message snippet: %s" % message["snippet"])
-
+            message = service.users().messages().get(userId=user_id, id=mail_id).execute()
             return message
         except errors.HttpError as error:
             print("An error occurred: %s" % error)
 
+    @classmethod
+    def parse_mail(cls, mail):
+        _mail = dict()
+        _mail['id'] = mail.get('id')
+        headers = mail.get('payload').get('headers')
+
+        for head in headers:
+            if head.get('name') == 'From':
+                _mail['sender'] = head.get('value')
+            if head.get('name') == 'Subject':
+                _mail['subject'] = head.get('value')
+            if head.get('name') == 'To':
+                _mail['receiver'] = head.get('value')
+            if head.get('name') == 'Date':
+                date_str = head.get('value')
+                date_str_updated = date_str.split()[:5]
+                date_str_updated = " ".join(date_str_updated)
+                date_time_obj = datetime.datetime.strptime(date_str_updated, "%a, %d %b %Y %H:%M:%S")
+                _mail['time_received'] = date_time_obj.strftime('%s')
+
+        return _mail
+
+    @classmethod
+    def update_mail_in_database(cls, service, user_id="me", ):
+        mail_list = MailService.list_message(service, user_id)
+        for mail in mail_list:
+            mail_id = mail.get('id')
+            mail = MailService.get_mail(
+                service=service,
+                user_id="me",
+                mail_id=mail_id
+            )
+            _mail = MailService.parse_mail(mail)
+            Mail.create_mail(_mail)
