@@ -1,0 +1,7 @@
+# Git Ignore
+*.DS_Store
+*.pyc
+.idea/
+env/
+credentials.json
+token.pickle
