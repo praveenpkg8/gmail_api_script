@@ -1,7 +1,3 @@
-import sqlalchemy as db
-from sqlalchemy.ext.declarative import declarative_base
+from models.mail import Mail
 
 
-Base = declarative_base()
-engine = db.create_engine('sqlite:///mail.sqlite')
-connection = engine.connect()
