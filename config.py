@@ -8,7 +8,11 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+SCOPES = [
+    "https://mail.google.com/",
+    "https://www.googleapis.com/auth/gmail.modify",
+    "https://www.googleapis.com/auth/gmail.labels"
+]
 
 
 def get_encrypted_credentials():
