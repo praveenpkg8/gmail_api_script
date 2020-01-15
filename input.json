@@ -1,0 +1,204 @@
+{
+  "predicate": [
+    {
+      "rule": "ALL",
+      "config": {
+        "sender": "CONTAINS",
+        "subject": "CONTAINS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": true,
+        "mark_as_un_read": false,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "noreply@mailers.zomato.com",
+        "subject": "Welcome to the future of food",
+        "time_received": 20
+      }
+    },
+    {
+      "rule": "ALL",
+      "config": {
+        "sender": "",
+        "subject": "CONTAINS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": true,
+        "mark_as_un_read": false,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "noreply@medium.com",
+        "subject": "Complete Guide to Create Docker Container for Your Golang Application | Afdol Riski in Level Up Coding",
+        "time_received": 10
+      }
+    },
+    {
+      "rule": "ALL",
+      "config": {
+        "sender": "CONTAINS",
+        "subject": "",
+        "is_lesser": false
+      },
+      "action": {
+        "mark_as_read": true,
+        "mark_as_un_read": false,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "googlepay-noreply@google.com",
+        "subject": "Protect your digital money, just like cash",
+        "time_received": 5
+      }
+    },
+    {
+      "rule": "ALL",
+      "config": {
+        "sender": "EQUALS",
+        "subject": "NOTEQUALS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": true,
+        "mark_as_un_read": false,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "no-reply@accounts.google.com",
+        "subject": "Security alert",
+        "time_received": 5
+      }
+    },
+    {
+      "rule": "ALL",
+      "config": {
+        "sender": "EQUALS",
+        "subject": "EQUALS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": true,
+        "mark_as_un_read": false,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "invitations@linkedin.com",
+        "subject": "Praveen, please add me to your LinkedIn network",
+        "time_received": 25
+      }
+    },
+    {
+      "rule": "ANY",
+      "config": {
+        "sender": "CONTAINS",
+        "subject": "CONTAINS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": false,
+        "mark_as_un_read": false,
+        "to_archive": false,
+        "is_label": true,
+        "label_name": "ZOMATO"
+      },
+      "details": {
+        "sender": "noreply@mailers.zomato.com",
+        "subject": "Welcome to the future of food",
+        "time_received": 20
+      }
+    },
+    {
+      "rule": "ANY",
+      "config": {
+        "sender": "",
+        "subject": "CONTAINS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": false,
+        "mark_as_un_read": true,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "noreply@medium.com",
+        "subject": "Complete Guide to Create Docker Container for Your Golang Application | Afdol Riski in Level Up Coding",
+        "time_received": 10
+      }
+    },
+    {
+      "rule": "ANY",
+      "config": {
+        "sender": "CONTAINS",
+        "subject": "",
+        "is_lesser": false
+      },
+      "action": {
+        "mark_as_read": false,
+        "mark_as_un_read": true,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "googlepay-noreply@google.com",
+        "subject": "Protect your digital money, just like cash",
+        "time_received": 5
+      }
+    },
+    {
+      "rule": "ANY",
+      "config": {
+        "sender": "EQUALS",
+        "subject": "NOTEQUALS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": false,
+        "mark_as_un_read": true,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "no-reply@accounts.google.com",
+        "subject": "Security alert",
+        "time_received": 5
+      }
+    },
+    {
+      "rule": "ANY",
+      "config": {
+        "sender": "EQUALS",
+        "subject": "EQUALS",
+        "is_lesser": true
+      },
+      "action": {
+        "mark_as_read": false,
+        "mark_as_un_read": true,
+        "to_archive": false,
+        "is_label": false,
+        "label_name": ""
+      },
+      "details": {
+        "sender": "invitations@linkedin.com",
+        "subject": "Praveen, please add me to your LinkedIn network",
+        "time_received": 25
+      }
+    }
+  ]
+}
