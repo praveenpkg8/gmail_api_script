@@ -44,3 +44,11 @@ def get_access_token():
 
     service = build('gmail', 'v1', credentials=creds)
     return service
+
+
+def load_input_data():
+    file_path = os.path.join(os.path.abspath("."), "input.json")
+    input_file = open(file_path, "rb")
+    input_data = json.load(input_file)
+    input_file.close()
+    return input_data.get('predicate')
