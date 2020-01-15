@@ -1,6 +1,7 @@
 import datetime
 
 from models.mail import Mail
+from services.label_service import LabelService
 
 from apiclient import errors
 
@@ -53,17 +54,23 @@ class MailService:
 
         for head in headers:
             if head.get('name') == 'From':
-                _mail['sender'] = head.get('value')
+                mail = MailService.parse_mail_id(
+                    mail_id=head.get('value')
+                )
+                _mail['sender'] = mail
             if head.get('name') == 'Subject':
                 _mail['subject'] = head.get('value')
             if head.get('name') == 'To':
-                _mail['receiver'] = head.get('value')
+                mail = MailService.parse_mail_id(
+                    mail_id=head.get('value')
+                )
+                _mail['receiver'] = mail
             if head.get('name') == 'Date':
                 date_str = head.get('value')
                 date_str_updated = date_str.split()[:5]
                 date_str_updated = " ".join(date_str_updated)
                 date_time_obj = datetime.datetime.strptime(date_str_updated, "%a, %d %b %Y %H:%M:%S")
-                _mail['time_received'] = date_time_obj.strftime('%s')
+                _mail['time_received'] = date_time_obj
 
         return _mail
 
@@ -79,3 +86,40 @@ class MailService:
             )
             _mail = MailService.parse_mail(mail)
             Mail.create_mail(_mail)
+
+    @classmethod
+    def fetch_mail_by_all_metrics(
+            cls,
+            sender_mail,
+            subject,
+            time_received=2
+    ):
+        date_obj = datetime.datetime.now() - datetime.timedelta(days=time_received)
+        Mail.filter_by_all_metrics(
+            sender_mail=sender_mail,
+            subject=subject,
+            time_received=date_obj
+        )
+
+    @classmethod
+    def fetch_mail_by_any_metrics(
+            cls,
+            sender_mail,
+            subject,
+            time_received=2
+    ):
+        date_obj = datetime.datetime.now() - datetime.timedelta(days=time_received)
+        Mail.filter_by_any_metrics(
+            sender_mail=sender_mail,
+            subject=subject,
+            time_received=date_obj
+        )
+
+    @classmethod
+    def parse_mail_id(cls, mail_id):
+        if "<" in mail_id and ">" in mail_id:
+            import re
+            mail = re.search("<(.*)>", mail_id)
+            mail = mail.group(1)
+            return mail
+        return mail_id.strip()
