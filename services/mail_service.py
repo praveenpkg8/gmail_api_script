@@ -9,29 +9,27 @@ from apiclient import errors
 class MailService:
 
     @classmethod
-    def list_message(cls, service, user_id, total_mails=50):
+    def list_message(cls, service, user_id, total_mails=100):
 
         try:
             response = service.users().messages().list(
                 userId=user_id,
-                maxResults=10
             ).execute()
             messages = []
             if "messages" in response:
                 messages.extend(response["messages"])
 
-            total_count = 10
+            total_count = 100
             while "nextPageToken" in response:
                 page_token = response["nextPageToken"]
                 response = service.users().messages() \
                     .list(
                     userId=user_id,
-                    maxResults=10,
                     pageToken=page_token
                 ).execute()
-                if total_count == total_mails:
+                if total_count > total_mails:
                     break
-                total_count += 10
+                total_count += 100
                 messages.extend(response["messages"])
 
             return messages
@@ -69,14 +67,18 @@ class MailService:
                 date_str = head.get('value')
                 date_str_updated = date_str.split()[:5]
                 date_str_updated = " ".join(date_str_updated)
-                date_time_obj = datetime.datetime.strptime(date_str_updated, "%a, %d %b %Y %H:%M:%S")
+                try:
+                    date_time_obj = datetime.datetime\
+                        .strptime(date_str_updated, "%a, %d %b %Y %H:%M:%S")
+                except ValueError:
+                    date_time_obj = datetime.datetime.now()
                 _mail['time_received'] = date_time_obj
 
         return _mail
 
     @classmethod
-    def update_mail_in_database(cls, service, user_id="me", ):
-        mail_list = MailService.list_message(service, user_id)
+    def update_mail_in_database(cls, service, total_mail, user_id="me"):
+        mail_list = MailService.list_message(service, user_id, total_mail)
         for mail in mail_list:
             mail_id = mail.get('id')
             mail = MailService.get_mail(
