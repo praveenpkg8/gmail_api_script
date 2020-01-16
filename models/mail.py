@@ -1,6 +1,5 @@
 from sqlalchemy import Column, String, DateTime
 
-
 from database import Base, session
 
 
@@ -29,8 +28,3 @@ class Mail(Base):
     def query_mail():
         mail = session.query(Mail)
         return mail
-
-
-
-
-

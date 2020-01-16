@@ -1,9 +1,7 @@
-from database import init_db
 from config import get_access_token, load_input_data
-
-
-from services.predicate_service import PredicateService
+from database import init_db
 from services.action_service import ActionService
+from services.predicate_service import PredicateService
 
 
 def perform_task():

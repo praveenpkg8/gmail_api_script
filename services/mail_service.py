@@ -1,9 +1,8 @@
 import datetime
 
-from models.mail import Mail
-from services.label_service import LabelService
-
 from apiclient import errors
+
+from models.mail import Mail
 
 
 class MailService:

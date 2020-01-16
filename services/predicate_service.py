@@ -1,6 +1,8 @@
-from sqlalchemy import and_, or_
-from models.mail import Mail
 import datetime
+
+from sqlalchemy import and_, or_
+
+from models.mail import Mail
 
 
 class PredicateService:
