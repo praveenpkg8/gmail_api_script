@@ -24,9 +24,7 @@ class ActionService:
             message = service.users().messages().modify(userId=user_id, id=msg_id,
                                                         body=msg_labels).execute()
 
-            label_ids = message['labelIds']
-
-            print('Message ID: %s - With Label IDs %s' % (msg_id, label_ids))
+            print("\n\n\n\n\nPerformed {} action for message who's id - {}\n\n\n\n\n".format(action, msg_id))
             return message
         except errors.HttpError as error:
             print('An error occurred: %s' % error)
