@@ -1,3 +1,4 @@
+import datetime
 from sqlalchemy import Column, String, DateTime
 
 from database import Base, session

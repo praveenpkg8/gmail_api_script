@@ -22,3 +22,4 @@ def load_mail_to_database(count):
 if __name__ == "__main__":
     init_db()
     load_mail_to_database()
+

@@ -2,7 +2,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('sqlite:///mail.db', echo=True)
+engine = create_engine('mysql://root:password@localhost/mail',
+                       echo=True)
 connection = engine.connect()
 
 Session = sessionmaker(bind=engine)
